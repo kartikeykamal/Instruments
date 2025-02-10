@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+<body>
+
+  <a href="/instruments.html" class="icon-container">
+    <img src="/images/icons8-back-24.png" alt="Icon">
+  </a>
+
+<div class="drumkit-container">
+  <h1 class="drum-title">DRUM SET</h1>
+  <img src="/Drum/drumset.png" alt="drum-set" class="center">
+  
+  <div class="keys">
+   
+    <div data-key="65" class="key hi-hat-position">
+      <kbd>A</kbd>
+      <span class="sound">hi-hat</span>
+    </div>
+
+    
+    <div data-key="83" class="key crash-position">
+      <kbd>S</kbd>
+      <span class="sound">crash</span>
+    </div>
+
+   
+    <div data-key="68" class="key snare-position">
+      <kbd>D</kbd>
+      <span class="sound">snare</span>
+    </div>
+
+   
+    <div data-key="70" class="key high-tom-position">
+      <kbd>F</kbd>
+      <span class="sound">high-tom</span>
+    </div>
+
+    
+    <div data-key="71" class="key mid-tom-position">
+      <kbd>G</kbd>
+      <span class="sound">mid-tom</span>
+    </div>
+
+    
+    <div data-key="72" class="key floor-tom-position">
+      <kbd>H</kbd>
+      <span class="sound">floor-tom</span>
+    </div>
+
+    
+    <div data-key="74" class="key bass-drum-position">
+      <kbd>J</kbd>
+      <span class="sound">bass drum</span>
+    </div>
+
+    
+    <div data-key="75" class="key cymbal-position">
+      <kbd>K</kbd>
+      <span class="sound">cymbal</span>
+    </div>
+
+</div>
+
+  <audio data-key="65" src="sounds/hi hat.wav"></audio>
+  <audio data-key="83" src="sounds/splash crash.wav"></audio>
+  <audio data-key="68" src="sounds/snare drum.wav"></audio>
+  <audio data-key="70" src="sounds/high tom.wav"></audio>
+  <audio data-key="71" src="sounds/mid tom.wav"></audio>
+  <audio data-key="72" src="sounds/floor tom.mp3"></audio>
+  <audio data-key="74" src="sounds/bass drum.mp3"></audio>
+  <audio data-key="75" src="sounds/clash cymbal.mp3"></audio>
+
+<script>
+	function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
+
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+</script>
+
+
+</body>
+</html>

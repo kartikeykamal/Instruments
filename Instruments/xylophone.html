@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://fav.farm/🔥" />
+    <title>Xylophone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background-image: url('./3d-rendering-carnival-frame-illustration.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        .icon-container {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 20;
+        }
+        .icon-container img {
+            width: 30px;  /* Adjust size */
+            height: auto;
+            cursor: pointer;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .heading {
+            font-size: 48px;
+            color: white;
+            text-transform: uppercase;
+            font-weight: 800;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            letter-spacing: 4px;
+            font-family: 'Arial Black', sans-serif;
+        }
+
+        .xylophone {
+            display: flex;
+            padding: 30px;
+            
+            border-radius: 20px;
+            gap: 8px;
+        }
+
+        .key {
+            width: 100px;  /* Increased width */
+            cursor: pointer;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 20px;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.1s;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .key kbd {
+            position: absolute;
+            top: 30px;
+            font-size: 36px;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+        }
+
+        .key .sound {
+            font-size: 24px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .playing {
+            transform: scale(0.95);
+        }
+
+        /* Adjusted heights and colors for each bar */
+        .key:nth-child(1) { height: 400px; background: #FF0000; }  /* C - Red */
+        .key:nth-child(2) { height: 375px; background: #FF7F00; }  /* D - Orange */
+        .key:nth-child(3) { height: 350px; background: #FFFF00; }  /* E - Yellow */
+        .key:nth-child(4) { height: 325px; background: #00FF00; }  /* F - Green */
+        .key:nth-child(5) { height: 300px; background: #0000FF; }  /* G - Blue */
+        .key:nth-child(6) { height: 275px; background: #4B0082; }  /* A - Indigo */
+        .key:nth-child(7) { height: 250px; background: #9400D3; }  /* B - Violet */
+        .key:nth-child(8) { height: 225px; background: #FF1493; }  /* C2 - Pink */
+    </style>
+</head>
+<body>
+    <a href="/instruments.html" class="icon-container">
+        <img src="/images/icons8-back-24.png" alt="Icon">
+    </a>
+    <div class="container">
+        <h1 class="heading">Xylophone</h1>
+        <div class="xylophone">
+            <div data-key="65" class="key">
+                <kbd>A</kbd>
+                <span class="sound">C4</span>
+            </div>
+            <div data-key="83" class="key">
+                <kbd>S</kbd>
+                <span class="sound">D4</span>
+            </div>
+            <div data-key="68" class="key">
+                <kbd>D</kbd>
+                <span class="sound">E4</span>
+            </div>
+            <div data-key="70" class="key">
+                <kbd>F</kbd>
+                <span class="sound">F4</span>
+            </div>
+            <div data-key="71" class="key">
+                <kbd>G</kbd>
+                <span class="sound">G4</span>
+            </div>
+            <div data-key="72" class="key">
+                <kbd>H</kbd>
+                <span class="sound">A4</span>
+            </div>
+            <div data-key="74" class="key">
+                <kbd>J</kbd>
+                <span class="sound">B4</span>
+            </div>
+            <div data-key="75" class="key">
+                <kbd>K</kbd>
+                <span class="sound">C5</span>
+            </div>
+        </div>
+    </div>
+
+    <audio data-key="65" src="sounds/wsuyq.mp3"></audio>
+    <audio data-key="83" src="sounds/wodyq.mp3"></audio>
+    <audio data-key="68" src="sounds/wnnyq.mp3"></audio>
+    <audio data-key="70" src="sounds/wmnyq.mp3"></audio>
+    <audio data-key="71" src="sounds/whtyq.mp3"></audio>
+    <audio data-key="72" src="sounds/wfwyq.mp3"></audio>
+    <audio data-key="74" src="sounds/wfpyq.mp3"></audio>
+    <audio data-key="75" src="sounds/watyq.mp3"></audio>
+
+    <script>
+        function playSound(e) {
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+            if (!audio) return;
+            audio.currentTime = 0;
+            audio.play();
+            key.classList.add('playing');
+        }
+
+        function removeTransition(e) {
+            if (e.propertyName !== 'transform') return;
+            this.classList.remove('playing');
+        }
+
+        function playClick() {
+            const keyCode = this.getAttribute('data-key');
+            const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
+            if (!audio) return;
+            audio.currentTime = 0;
+            audio.play();
+            this.classList.add('playing');
+        }
+
+        const keys = document.querySelectorAll('.key');
+        keys.forEach(key => {
+            key.addEventListener('transitionend', removeTransition);
+            key.addEventListener('mouseover', playClick);
+        });
+        window.addEventListener('keydown', playSound);
+    </script>
+</body>
+</html> 

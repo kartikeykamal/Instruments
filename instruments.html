@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instruments Page</title>
+    <link rel="icon" href="https://fav.farm/🔥" />
+    <link rel="stylesheet" href="path/to/your/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet"> 
+    <style>
+        body {
+            background-image: url('/images/bg.jpg');
+            background-size: cover; 
+            background-position: center;
+            margin: 0;
+            font-family: Arial, sans-serif; 
+        }
+
+        .instruments {
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 30px; 
+            padding: 30px;
+        }
+
+        .instrument {
+            width: 300px;
+            height: auto; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        }
+
+        .instrument:hover {
+            transform: scale(1.05); 
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); 
+        }
+
+        h1 {
+            text-align: center; 
+            font-family: 'Lobster', cursive;
+            color: wheat;
+            margin-top: 80px;
+            margin-bottom: 60px;
+            text-shadow: 6px 6px 8px rgba(0, 0, 0, 0.9);
+            font-size: 6rem;
+        }
+        .icon {
+            margin: 20px;
+            cursor: pointer;
+            font-size: 2.5rem;
+            padding: 15px 25px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            background-color: #fff; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s; 
+            font-family: 'Roboto', sans-serif; 
+        }
+        .icon:hover {
+            background-color: #ddd;
+            transform: translateY(-3px); 
+        }
+    </style>
+</head>
+<body>
+    <h1>Select an Instrument</h1>
+    <div class="instruments">
+        <img src="images/drum.jpg" alt="Drum" onclick="location.href='Drum/main.html'" class="instrument">
+        <img src="images/guitar.jpg" alt="Guitar" onclick="location.href='guitar/guitar.html'" class="instrument">
+        <img src="images/xylophone.jpg" alt="Xylophone" onclick="location.href='Instruments/xylophone.html'" class="instrument">
+    </div>
+</body>
+</html> 
